@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
           title: const Text('My First Flutter App'),
         ),
         body: const Center(
-          child: Text('Hello World'),
+          child: Text(
+              'Hello World! \nMy name is Eunice Adewusi but, \nyou can call me Climiradi 👋🏾😌'),
         ),
       ),
     );
