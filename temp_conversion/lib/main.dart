@@ -58,96 +58,91 @@ class TempState extends State<TempApp> {
       backgroundColor: Colors.red, // Crimson app bar background color
     );
 
-    // Container for temperature unit switch
-    Container tempSwitch = Container(
-      padding: const EdgeInsets.all(15.0),
-      child: Row(
-        children: <Widget>[
-          const Text("F"), // Fahrenheit label
-          Radio<bool>(
-            groupValue: fOrC,
-            value: false, // Radio button for Fahrenheit
-            onChanged: (v) {
-              setState(() {
-                fOrC = v ?? false; // Update the unit selection
-              });
-            },
-          ),
-          const Text("C"), // Celsius label
-          Radio<bool>(
-            groupValue: fOrC,
-            value: true, // Radio button for Celsius
-            onChanged: (v) {
-              setState(() {
-                fOrC = v ?? true; // Update the unit selection
-              });
-            },
-          ),
-        ],
-      ),
-    );
-
-    // Container for the conversion button
-    Container calcBtn = Container(
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click, // Changing cursor to hand on hover
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red, // Crimson button color
-            foregroundColor: Colors.white, // Set button text color to white
-          ),
-          child: const Text("Convert"), // Button text
-          onPressed: () {
+    // Temperature unit switch
+    Row tempSwitch = Row(
+      children: <Widget>[
+        const Text("F"), // Fahrenheit label
+        Radio<bool>(
+          groupValue: fOrC,
+          value: false, // Radio button for Fahrenheit
+          onChanged: (v) {
             setState(() {
-              // Perform the temperature conversion
-              if (fOrC == false) {
-                output = (input - 32) * (5 / 9); // Convert Fahrenheit to Celsius
-                conversionHistory.add(
-                    "${input.toStringAsFixed(2)} F = ${output.toStringAsFixed(2)} C"); // Log conversion history
-              } else {
-                output = (input * 9 / 5) + 32; // Convert Celsius to Fahrenheit
-                conversionHistory.add(
-                    "${input.toStringAsFixed(2)} C = ${output.toStringAsFixed(2)} F"); // Log conversion history
-              }
+              fOrC = v ?? false; // Update the unit selection
             });
-
-            // AlertDialog to show the conversion result
-            AlertDialog dialog = AlertDialog(
-              contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0), // Adjusted padding to be smaller
-              content: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.1, // Set the width relative to screen size
-                height: MediaQuery.of(context).size.height * 0.05, // Limit the height to 5% of the screen height
-                child: Center( // Centering the text
-                  child: fOrC == false
-                      ? Text(
-                          "${input.toStringAsFixed(2)} F : ${output.toStringAsFixed(2)} C",
-                          textAlign: TextAlign.center, // Align text to center
-                          style: const TextStyle( // Styling the text
-                            fontSize: 20.0, // Set the font size
-                            fontWeight: FontWeight.bold, // Make the text bold
-                          ),
-                        )
-                      : Text(
-                          "${input.toStringAsFixed(2)} C : ${output.toStringAsFixed(2)} F",
-                          textAlign: TextAlign.center, // Align text to center
-                          style: const TextStyle( // Styling the text
-                            fontSize: 20.0, // Set the font size
-                            fontWeight: FontWeight.bold, // Make the text bold
-                          ),
-                        ),
-                ),
-              ),
-            );
-
-            // Show the dialog
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return dialog;
-              },
-            );
           },
         ),
+        const Text("C"), // Celsius label
+        Radio<bool>(
+          groupValue: fOrC,
+          value: true, // Radio button for Celsius
+          onChanged: (v) {
+            setState(() {
+              fOrC = v ?? true; // Update the unit selection
+            });
+          },
+        ),
+      ],
+    );
+
+    // Conversion button
+    MouseRegion calcBtn = MouseRegion(
+      cursor: SystemMouseCursors.click, // Changing cursor to hand on hover
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red, // Crimson button color
+          foregroundColor: Colors.white, // Set button text color to white
+        ),
+        child: const Text("Convert"), // Button text
+        onPressed: () {
+          setState(() {
+            // Perform the temperature conversion
+            if (fOrC == false) {
+              output = (input - 32) * (5 / 9); // Convert Fahrenheit to Celsius
+              conversionHistory.add(
+                  "${input.toStringAsFixed(2)} F = ${output.toStringAsFixed(2)} C"); // Log conversion history
+            } else {
+              output = (input * 9 / 5) + 32; // Convert Celsius to Fahrenheit
+              conversionHistory.add(
+                  "${input.toStringAsFixed(2)} C = ${output.toStringAsFixed(2)} F"); // Log conversion history
+            }
+          });
+
+          // AlertDialog to show the conversion result
+          AlertDialog dialog = AlertDialog(
+            contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0), // Adjusted padding to be smaller
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.1, // Set the width relative to screen size
+              height: MediaQuery.of(context).size.height * 0.05, // Limit the height to 5% of the screen height
+              child: Center( // Centering the text
+                child: fOrC == false
+                    ? Text(
+                        "${input.toStringAsFixed(2)} F : ${output.toStringAsFixed(2)} C",
+                        textAlign: TextAlign.center, // Align text to center
+                        style: const TextStyle( // Styling the text
+                          fontSize: 20.0, // Set the font size
+                          fontWeight: FontWeight.bold, // Make the text bold
+                        ),
+                      )
+                    : Text(
+                        "${input.toStringAsFixed(2)} C : ${output.toStringAsFixed(2)} F",
+                        textAlign: TextAlign.center, // Align text to center
+                        style: const TextStyle( // Styling the text
+                          fontSize: 20.0, // Set the font size
+                          fontWeight: FontWeight.bold, // Make the text bold
+                        ),
+                      ),
+              ),
+            ),
+          );
+
+          // Show the dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return dialog;
+            },
+          );
+        },
       ),
     );
 
@@ -157,7 +152,7 @@ class TempState extends State<TempApp> {
         onTap: () {
           focusNode.unfocus(); // Hide keyboard when tapping outside
         },
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
@@ -165,7 +160,6 @@ class TempState extends State<TempApp> {
               tempSwitch, // Temperature unit switch
               calcBtn, // Conversion button
               const SizedBox(height: 20), // Space between the button and the list
-              const SizedBox(height: 20), // Additional space before the title
               const Text(
                 'Conversion History',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
