@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/catalogue_animation/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/catalogue_animation/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/catalogue_animation/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dice_roller_project/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/dice_roller_project/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/dice_roller_project/build" />
+      <excludeFolder url="file://$MODULE_DIR$/first_flutter_project/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/first_flutter_project/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/first_flutter_project/build" />
+      <excludeFolder url="file://$MODULE_DIR$/product_nav/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/product_nav/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/product_nav/build" />
+      <excludeFolder url="file://$MODULE_DIR$/temp_conversion/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/temp_conversion/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/temp_conversion/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>
