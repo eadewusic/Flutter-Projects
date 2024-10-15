@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'theme.dart'; // Import your theme file
+import 'theme.dart'; // Import theme file
 import 'product.dart'; // Import product file
 
 void main() {
@@ -79,7 +79,7 @@ class CatalogPage extends StatelessWidget {
   }
 }
 
-// ProductGrid widget remains unchanged
+// ProductGrid widget displays a grid of product cards
 class ProductGrid extends StatefulWidget {
   const ProductGrid({super.key});
 
@@ -88,20 +88,11 @@ class ProductGrid extends StatefulWidget {
 }
 
 class ProductGridState extends State<ProductGrid> {
-  Map<int, double> opacities = {};
+  double opacity = 1.0;
 
-  @override
-  void initState() {
-    super.initState();
-    for (int i = 0; i < products.length; i++) {
-      opacities[i] = 1.0;
-    }
-  }
-
-  void _handleTap(int index, BuildContext context) {
-    final product = products[index];
+  void _handleTap(BuildContext context, Product product) {
     setState(() {
-      opacities[index] = opacities[index] == 1.0 ? 0.5 : 1.0;
+      opacity = opacity == 1.0 ? 0.5 : 1.0;
     });
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -113,7 +104,7 @@ class ProductGridState extends State<ProductGrid> {
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             setState(() {
-              opacities[index] = 1.0;
+              opacity = 1.0;
             });
           },
         ),
@@ -134,10 +125,10 @@ class ProductGridState extends State<ProductGrid> {
       itemBuilder: (context, index) {
         final product = products[index];
         return GestureDetector(
-          onTap: () => _handleTap(index, context),
+          onTap: () => _handleTap(context, product),
           child: AnimatedOpacity(
-            duration: Duration(milliseconds: 300),
-            opacity: opacities[index] ?? 1.0,
+            duration: Duration(seconds: 1),
+            opacity: opacity,
             child: Card(
               elevation: 4,
               child: Padding(
