@@ -1,16 +1,13 @@
-# catalogue_animation
+# Product Catalogue App with Theme Toggle and Animation
 
-A new Flutter project.
+This Flutter application is a product catalogue with a light and dark theme toggle and basic animations. The app is built using `MaterialApp` and showcases interactive product cards with a smooth transition animation.
 
-## Getting Started
+## Features
+- Light and dark themes with a toggle button to switch between them.
+- A product catalogue displayed using a `GridView` with product names, images, and prices.
+- Interactive product cards that display a snackbar with the product name when tapped.
+- Basic animation using `AnimatedOpacity` for smooth visual transitions.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Prerequisites
+- Flutter SDK installed on your machine.
+- Any IDE with Flutter support (e.g., Android Studio, Visual Studio Code).
