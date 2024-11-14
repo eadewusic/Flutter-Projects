@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'utils/favorites.dart';
+import 'models/favorites.dart';
 import 'screens/favorites_screen.dart';
 import 'widgets/product.dart';
 
