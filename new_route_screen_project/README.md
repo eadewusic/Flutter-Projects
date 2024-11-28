@@ -2,8 +2,6 @@
 
 This Flutter application demonstrates how to pass data between screens. It includes two screens: **First Screen** for data input and **Second Screen** for displaying the passed data.
 
----
-
 ## **Features**
 - Collect user input (name and email) on the first screen.
 - Validate the input fields to ensure:
