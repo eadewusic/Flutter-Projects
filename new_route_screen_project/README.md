@@ -1,16 +1,38 @@
-# new_route_screen_project
+# Data Passing App
 
-A new Flutter project.
+This Flutter application demonstrates how to pass data between screens. It includes two screens: **First Screen** for data input and **Second Screen** for displaying the passed data.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## **Features**
+- Collect user input (name and email) on the first screen.
+- Validate the input fields to ensure:
+  - Name is not empty.
+  - Email is not empty and has a valid format.
+- Pass the input data to a second screen.
+- Display the received data on the second screen.
+- Navigate back to the first screen from the second screen.
 
-A few resources to get you started if this is your first Flutter project:
+## **Screens Overview**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 1. **First Screen**
+- **Widget Type**: Stateful Widget
+- **Layout**:
+  - Contains two input fields for name and email.
+  - Includes a "Submit" button to navigate to the second screen.
+- **Features**:
+  - Validates the inputs using a `Form` widget.
+  - Uses `TextEditingController` to manage input values.
+  - Navigates to the second screen, passing the entered data.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2. **Second Screen**
+- **Widget Type**: Stateless Widget
+- **Layout**:
+  - Displays the name and email passed from the first screen.
+  - Includes a "Go Back" button to return to the first screen.
+
+## **Validation Rules**
+1. **Name**: Cannot be empty.
+2. **Email**: 
+   - Cannot be empty.
+   - Must be in a valid email format (e.g., `example@domain.com`).
