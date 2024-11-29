@@ -11,6 +11,7 @@ class CompareScreen extends StatelessWidget {
     final countries = compareProvider.compareList;
 
     return Scaffold(
+      backgroundColor: const Color(0xE0E3F8FF), // Set background color
       appBar: AppBar(
         backgroundColor: Colors.blueAccent, // Blue accent color for the AppBar
         title: const Text(
