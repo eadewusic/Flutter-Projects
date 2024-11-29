@@ -12,10 +12,29 @@ class CompareScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Compare Countries'),
+        backgroundColor: Colors.blueAccent, // Blue accent color for the AppBar
+        title: const Text(
+          'Compare Countries',
+          style: TextStyle(
+            color: Colors.white, // White color for the title text
+            fontWeight: FontWeight.bold, // Bold title text
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white, // White color for back icon
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white, // White color for the refresh icon
+            ),
             onPressed: () {
               compareProvider.resetComparison();
               Navigator.pop(context);

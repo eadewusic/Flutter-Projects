@@ -9,7 +9,27 @@ class CountryDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(country.name)),
+      backgroundColor:
+          const Color(0xE0E3F8FF), // Very light shade of blue (RGBA with 80% opacity)
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent, // Set the AppBar background color
+        title: Text(
+          country.name,
+          style: const TextStyle(
+            color: Colors.white, // Set text color to white
+            fontWeight: FontWeight.bold, // Set text to bold
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white, // Set back icon color to white
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
