@@ -10,22 +10,54 @@ class CountryDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(country.name)),
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.network(
+                country.flag,
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                    Icons.flag,
+                    size: 200,
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              _buildDetailCard([
+                'Capital: ${country.capital}',
+                'Population: ${country.population}',
+                'Region: ${country.region}',
+                'Languages: ${country.languages.join(', ')}',
+              ]),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailCard(List<String> details) {
+    return Card(
+      elevation: 4,
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(country.flag, width: double.infinity, height: 200),
-            const SizedBox(height: 10),
-            Text('Capital: ${country.capital}',
-                style: const TextStyle(fontSize: 18)),
-            Text('Population: ${country.population}',
-                style: const TextStyle(fontSize: 18)),
-            Text('Region: ${country.region}',
-                style: const TextStyle(fontSize: 18)),
-            Text('Languages: ${country.languages.join(', ')}',
-                style: const TextStyle(fontSize: 18)),
-          ],
+          children: details.map((detail) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(
+                detail,
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

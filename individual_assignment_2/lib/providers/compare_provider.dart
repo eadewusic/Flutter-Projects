@@ -1,29 +1,28 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '../models/country_model.dart';
 
-class CompareProvider with ChangeNotifier {
+class CompareProvider extends ChangeNotifier {
   final List<Country> _compareList = [];
 
   List<Country> get compareList => _compareList;
 
-  void addCountry(Country country) {
-    if (_compareList.length < 2) {
+  void toggleCompare(Country country) {
+    if (_compareList.contains(country)) {
+      _compareList.remove(country);
+    } else if (_compareList.length < 2) {
       _compareList.add(country);
-      notifyListeners();
     }
-  }
-
-  void removeCountry(Country country) {
-    _compareList.remove(country);
     notifyListeners();
   }
 
-  void resetComparison() {
+  bool isInCompareList(Country country) {
+    return _compareList.contains(country);
+  }
+
+  void clearCompareList() {
     _compareList.clear();
     notifyListeners();
   }
 
-  void toggleCompare(country) {}
-
-  isInCompareList(country) {}
+  void resetComparison() {}
 }

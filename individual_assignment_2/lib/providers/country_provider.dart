@@ -6,14 +6,19 @@ import '../models/country_model.dart';
 
 class CountryProvider extends ChangeNotifier {
   List<Country> _countries = [];
+  List<Country> _filteredCountries = [];
   bool _isLoading = false;
+  String _errorMessage = '';
 
-  List<Country> get countries => _countries;
+  List<Country> get countries =>
+      _filteredCountries.isNotEmpty ? _filteredCountries : _countries;
   bool get isLoading => _isLoading;
+  String get errorMessage => _errorMessage;
 
   // Fetch countries from the REST Countries API
   Future<void> fetchCountries() async {
     _isLoading = true;
+    _errorMessage = '';
     notifyListeners();
 
     const url = 'https://restcountries.com/v3.1/all';
@@ -28,10 +33,9 @@ class CountryProvider extends ChangeNotifier {
                   countryData['languages'] is Map)
               ? (countryData['languages'] as Map)
                   .values
-                  .map<String>(
-                      (lang) => lang.toString()) // Ensure the type is String
+                  .map<String>((lang) => lang.toString())
                   .toList()
-              : <String>[]; // Default to an empty List<String>
+              : <String>[];
 
           return Country(
             name: countryData['name']['common'] ?? 'Unknown',
@@ -43,18 +47,36 @@ class CountryProvider extends ChangeNotifier {
             region: countryData['region'] ?? 'Unknown',
             population: countryData['population'] ?? 0,
             flag: countryData['flags']['png'] ?? '',
-            languages: languages, // Pass the properly typed List<String>
+            languages: languages,
           );
         }).toList();
+
+        // Sort countries alphabetically
+        _countries.sort((a, b) => a.name.compareTo(b.name));
       } else {
+        _errorMessage = 'Failed to load countries. Please try again.';
         throw Exception('Failed to load countries');
       }
     } catch (error) {
       debugPrint('Error fetching countries: $error');
+      _errorMessage = 'Network error. Please check your connection.';
       _countries = [];
     } finally {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  // Filter countries by name
+  void filterCountries(String query) {
+    if (query.isEmpty) {
+      _filteredCountries = [];
+    } else {
+      _filteredCountries = _countries
+          .where((country) =>
+              country.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
   }
 }

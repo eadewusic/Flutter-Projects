@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/compare_provider.dart';
-// import '../models/country_model.dart';
 
 class CompareScreen extends StatelessWidget {
   const CompareScreen({super.key});
