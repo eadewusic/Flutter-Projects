@@ -4,39 +4,40 @@ import '../models/country_model.dart';
 
 class CompareProvider extends ChangeNotifier {
   final List<Country> _compareList = [];
+  final List<List<Country>> _historyList = [];
   String _errorMessage = '';
 
   List<Country> get compareList => _compareList;
+  List<List<Country>> get historyList => _historyList;
   String get errorMessage => _errorMessage;
 
   void toggleCompare(Country country) {
-    // If the country is already in the compare list, remove it
     if (_compareList.contains(country)) {
       _compareList.remove(country);
-      _errorMessage = ''; // Clear any error when removing
-    }
-    // If the country is not in the compare list, add it
-    else if (_compareList.length < 2) {
+      _errorMessage = '';
+    } else if (_compareList.length < 2) {
       _compareList.add(country);
-      _errorMessage = ''; // Clear any error when adding a country
-    }
-    // If more than 2 countries are selected, set an error message
-    else {
+      _errorMessage = '';
+    } else {
       _errorMessage = 'You can only compare 2 countries at a time!';
     }
+    notifyListeners();
+  }
 
+  void addComparisonToHistory() {
+    if (_compareList.length == 2) {
+      _historyList.add(List.from(_compareList));
+    }
+    notifyListeners();
+  }
+
+  void clearCompareList() {
+    _compareList.clear();
+    _errorMessage = '';
     notifyListeners();
   }
 
   bool isInCompareList(Country country) {
     return _compareList.contains(country);
   }
-
-  void clearCompareList() {
-    _compareList.clear();
-    _errorMessage = ''; // Clear error when the list is cleared
-    notifyListeners();
-  }
-
-  void resetComparison() {}
 }

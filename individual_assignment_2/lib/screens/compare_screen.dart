@@ -11,52 +11,46 @@ class CompareScreen extends StatelessWidget {
     final countries = compareProvider.compareList;
 
     return Scaffold(
-      backgroundColor: const Color(0xE0E3F8FF), // Set background color
+      backgroundColor: const Color(0xE0E3F8FF),
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent, // Blue accent color for the AppBar
+        backgroundColor: Colors.blueAccent,
         title: const Text(
           'Compare Countries',
           style: TextStyle(
-            color: Colors.white, // White color for the title text
-            fontWeight: FontWeight.bold, // Bold title text
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white, // White color for back icon
-          ),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.refresh,
-              color: Colors.white, // White color for the refresh icon
-            ),
+            icon: const Icon(Icons.refresh, color: Colors.white),
             onPressed: () {
-              compareProvider.resetComparison();
+              compareProvider.clearCompareList();
               Navigator.pop(context);
             },
           ),
         ],
       ),
-      body: countries.length < 2
-          ? Center(
-              child: Text(
-                countries.isEmpty
-                    ? 'No countries selected for comparison.'
-                    : 'Select one more country for comparison.',
-                style: const TextStyle(fontSize: 18),
-                textAlign: TextAlign.center,
-              ),
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
+      body: Column(
+        children: [
+          Expanded(
+            child: countries.length < 2
+                ? Center(
+                    child: Text(
+                      countries.isEmpty
+                          ? 'No countries selected for comparison.'
+                          : 'Select one more country for comparison.',
+                      style: const TextStyle(fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : ListView.builder(
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       final country = countries[index];
@@ -116,9 +110,85 @@ class CompareScreen extends StatelessWidget {
                       );
                     },
                   ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              compareProvider.addComparisonToHistory();
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
                 ),
-              ],
+                builder: (BuildContext context) {
+                  final historyList = compareProvider.historyList;
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Center(
+                          child: Text(
+                            'Comparison History',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        Expanded(
+                          child: historyList.isEmpty
+                              ? const Center(
+                                  child: Text(
+                                    'No comparison history available.',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  itemCount: historyList.length,
+                                  itemBuilder: (context, index) {
+                                    final comparison = historyList[index];
+                                    return ListTile(
+                                      title: Text(
+                                        '${comparison[0].name} vs ${comparison[1].name}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Close'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 148, vertical: 15),
             ),
+            child: const Text(
+              'View History',
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
