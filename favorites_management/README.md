@@ -2,6 +2,8 @@
 
 A simple Flutter application that allows users to manage a list of favorite items using the `Provider` package for state management and `SharedPreferences` for data persistence. This app demonstrates state management, persistent storage, and clean UI design principles in Flutter.
 
+![e adewusi_StateManagement-Cover](https://github.com/user-attachments/assets/4ebfd9a4-cfcb-40ef-aeee-f8eed61fb6f0)
+
 ## Features
 
 - Browse through a list of products with details like name, price, and image.
